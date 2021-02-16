@@ -1,4 +1,4 @@
-# konishi_app
+# Apex掲示板アプリ作成
 
 ## Project setup
 ```
