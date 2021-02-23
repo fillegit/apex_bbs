@@ -2,23 +2,26 @@
   <div class="">
     <v-form ref="form">
       <v-text-field
-        v-model="newComment"
+        v-model="newPost.comment"
         label="コメント"
         required
       ></v-text-field>
-      <v-btn color="primary" dark @click="createPost(newComment)">投稿</v-btn>
+      <v-btn color="primary" dark @click="createPost(newPost)">投稿する</v-btn>
     </v-form>
+
     <v-list three-line>
-      <template v-for="comment in comments">
-        <v-list-item :key="comment.title">
+      <template v-for="(post, index) in posts">
+        <v-list-item :key="index.toString()">
           <v-list-item-avatar>
-            <v-img :src="comment.avatar"></v-img>
+            <v-img :src="post.fields.avatar.stringValue"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title v-html="comment.type"></v-list-item-title>
+            <v-list-item-title
+              v-html="post.fields.type.stringValue"
+            ></v-list-item-title>
             <v-list-item-subtitle
-              v-html="comment.comment"
+              v-html="post.fields.comment.stringValue"
             ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -28,57 +31,74 @@
 </template>
 
 <script>
+  import axios from "axios";
+  import firebase from "firebase/app";
+
   export default {
-    created() {
+    async created() {
       console.log("created");
+      const options = {
+        method: "GET",
+        url:
+          "https://firestore.googleapis.com/v1/projects/apex-bbs/databases/(default)/documents/posts",
+      };
+      try {
+        const res = await axios(options);
+        console.log(res.data.documents);
+        this.posts = res.data.documents;
+      } catch (e) {
+        console.log(e);
+      }
     },
     data() {
       return {
-        newComment: "",
-        comments: [
-          {
-            id: 0,
-            no: "517794",
-            date: "02月15日",
-            psid: "chacha-nikidasu",
-            comment:
-              "自分はゴールドの4です 一緒にほどよく楽しく遊べると嬉しいです",
-            type: "PS4",
-            avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-          },
-          {
-            id: 1,
-            no: "517793",
-            date: "02月14日",
-            psid: "gawaratic",
-            comment:
-              "プラチナランクご一緒できる方お願いします！ アラサー社会人です！",
-            type: "PS4",
-            avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          },
-          {
-            id: 2,
-            no: "517792",
-            date: "02月13日",
-            psid: "harucchikamino",
-            comment:
-              "プラチナ帯@2募集(出来ればダイヤ経験者) 今、後90くらいでダイヤなのでサクッとちゃんぽん取りに行きたいです。キャラ構成は、任せます。レイス、オクタン、レブ、ライフライン、くらいなら使えます。 レイスは縦ハン爪痕です。よかったら来てください。 EAID GF-harucchi",
-            type: "PS4",
-            avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-          },
-        ],
+        newPost: { avatar: "", comment: "", no: "", psid: "", type: "" },
+        posts: [],
       };
     },
     methods: {
       countUp() {
         this.count++;
       },
-      createPost(comment) {
+
+      async createPost({
+        avatar = "",
+        comment = "",
+        no = "",
+        psid = "",
+        type = "",
+      }) {
         console.log(comment);
-        const copy = this.comments.slice();
-        const newId = copy[copy.length - 1].id + 1;
-        this.comments = [{ comment: this.newComment, id: newId }, ...copy];
-        this.newComment = "";
+        const db = firebase.firestore();
+        db.collection("posts")
+          .add({
+            avatar,
+            comment,
+            no,
+            psid,
+            type,
+          })
+          .then((docRef) => {
+            const copy = this.posts.slice();
+            this.posts = [
+              {
+                fields: {
+                  avatar: { stringValue: avatar },
+                  comment: { stringValue: comment },
+                  no: { stringValue: no },
+                  psid: { stringValue: psid },
+                  type: { stringValue: type },
+                },
+              },
+              ...copy,
+            ];
+            console.log(this.posts);
+            this.newPost = [];
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch((error) => {
+            console.error("Error adding document: ", error);
+          });
       },
     },
   };

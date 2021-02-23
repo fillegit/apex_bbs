@@ -41,7 +41,6 @@
   </v-app>
 </template>
 
-
 <script>
   import Comments from "./components/Comments";
   import FooterButtons from "./components/FooterButtons";
