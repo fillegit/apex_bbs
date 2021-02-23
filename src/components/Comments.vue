@@ -7,6 +7,7 @@
         required
       ></v-text-field>
       <v-btn color="primary" dark @click="createPost(newPost)">投稿する</v-btn>
+      <v-btn color="primary" dark @click="showDb">DBデータ表示</v-btn>
     </v-form>
 
     <v-list three-line>
@@ -44,7 +45,6 @@
       };
       try {
         const res = await axios(options);
-        console.log(res.data.documents);
         this.posts = res.data.documents;
       } catch (e) {
         console.log(e);
@@ -60,7 +60,6 @@
       countUp() {
         this.count++;
       },
-
       async createPost({
         avatar = "",
         comment = "",
@@ -68,7 +67,6 @@
         psid = "",
         type = "",
       }) {
-        console.log(comment);
         const db = firebase.firestore();
         db.collection("posts")
           .add({
@@ -99,6 +97,20 @@
           .catch((error) => {
             console.error("Error adding document: ", error);
           });
+      },
+      async showDb() {
+        const db = firebase.firestore();
+        const data = await db
+          .collection("posts")
+          .get()
+          .then((querySnapshot) => {
+            console.log(querySnapshot);
+            querySnapshot.forEach(() => {
+              // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+            });
+          });
+
+        console.log(data);
       },
     },
   };
