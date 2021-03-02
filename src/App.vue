@@ -34,7 +34,7 @@
     </v-app-bar>
 
     <v-main>
-      <PostComment />
+      <!-- <PostComment /> -->
       <Comments />
       <FooterButtons />
     </v-main>
@@ -44,14 +44,14 @@
 <script>
   import Comments from "./components/Comments";
   import FooterButtons from "./components/FooterButtons";
-  import PostComment from "./components/PostComment";
+  // import PostComment from "./components/PostComment";
   export default {
     name: "App",
 
     components: {
       Comments,
       FooterButtons,
-      PostComment,
+      // PostComment,
     },
 
     data: () => ({
