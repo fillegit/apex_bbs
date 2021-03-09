@@ -36,26 +36,26 @@
     <v-main>
       <!-- <PostComment /> -->
       <Comments />
-      <FooterButtons />
+      <!-- <FooterButtons /> -->
     </v-main>
   </v-app>
 </template>
 
 <script>
-  import Comments from "./components/Comments";
-  import FooterButtons from "./components/FooterButtons";
-  // import PostComment from "./components/PostComment";
-  export default {
-    name: "App",
+import Comments from "./components/Comments";
+// import FooterButtons from "./components/FooterButtons";
+// import PostComment from "./components/PostComment";
+export default {
+  name: "App",
 
-    components: {
-      Comments,
-      FooterButtons,
-      // PostComment,
-    },
+  components: {
+    Comments,
+    // FooterButtons,
+    // PostComment,
+  },
 
-    data: () => ({
-      //
-    }),
-  };
+  data: () => ({
+    //
+  }),
+};
 </script>
