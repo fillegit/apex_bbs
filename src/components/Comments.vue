@@ -1,13 +1,5 @@
 <template>
   <div class="">
-    <!-- <v-form ref="form">
-      <v-text-field
-        v-model="newPost.comment"
-        label="コメント"
-        required
-      ></v-text-field>
-      <v-btn color="primary" dark >投稿する</v-btn>
-    </v-form> -->
     <div>
       <!--フォームの表示ボタン-->
       <v-btn color="blue" dark center fab fixed right @click="showCreateForm">
