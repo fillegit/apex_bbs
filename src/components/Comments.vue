@@ -1,9 +1,102 @@
 <template>
   <div class="">
+    <!--検索条件-->
+    <h4>検索条件</h4>
+    <v-container>
+      <div>
+        <h5>プラットフォーム</h5>
+        <select class="selectBox" v-model="searchCondition.platform">
+          <option value="">プラットフォームを選択してください</option>
+          <option
+            v-for="(v, i) in platforms"
+            :key="i"
+            :value="v"
+            v-text="v"
+          ></option>
+        </select>
+      </div>
+      <div>
+        <h5>ランク</h5>
+        <select class="selectBox" v-model="searchCondition.rank">
+          <option value="">ランクを選択してください</option>
+          <option
+            v-for="(v, i) in ranks"
+            :key="i"
+            :value="v"
+            v-text="v"
+          ></option>
+        </select>
+      </div>
+      <div>
+        <h5>VC</h5>
+        <select class="selectBox" v-model="searchCondition.vc">
+          <option value="">VCを選択してください</option>
+          <option v-for="(v, i) in vcs" :key="i" :value="v" v-text="v"></option>
+        </select>
+      </div>
+      <h5>プレイスタイル</h5>
+      <div v-for="(v, i) in playstyles" :key="i">
+        <input
+          :id="'playstyle' + i"
+          type="checkbox"
+          :value="v"
+          v-model="searchCondition.playstyle"
+        />
+        <label :for="'playstyle' + i">{{ v }}</label>
+      </div>
+      <div>
+        <h5>自分のキャラクター</h5>
+        <select class="selectBox" v-model="searchCondition.myCharacter">
+          <option value="">自分のキャラクターを選択してください</option>
+          <option
+            v-for="(v, i) in myCharacters"
+            :key="i"
+            :value="v"
+            v-text="v"
+          ></option>
+        </select>
+      </div>
+      <h5>欲しいキャラ</h5>
+      <div v-for="(v, i) in seekingCharacters" :key="i">
+        <input
+          :id="'seekingCharacter' + i"
+          type="checkbox"
+          :value="v"
+          v-model="searchCondition.seekingCharacter"
+        />
+        <label :for="'seekingCharacter' + i">{{ v }}</label>
+      </div>
+      <div>
+        <h5>自分の今までの最高ランク</h5>
+        <select class="selectBox" v-model="searchCondition.maxRank">
+          <option value="">今までの最高ランクを選択してください</option>
+          <option
+            v-for="(v, i) in maxRanks"
+            :key="i"
+            :value="v"
+            v-text="v"
+          ></option>
+        </select>
+      </div>
+      <div>
+        <h5>獲得バッチ</h5>
+        <select class="selectBox" v-model="searchCondition.badge">
+          <option value="">獲得したバッチを選択してください</option>
+          <option
+            v-for="(v, i) in badges"
+            :key="i"
+            :value="v"
+            v-text="v"
+          ></option>
+        </select>
+      </div>
+    </v-container>
+    <!--検索条件/-->
+
     <div>
       <!--フォームの表示ボタン-->
-      <v-btn color="blue" dark center fab fixed right @click="showCreateForm">
-        <v-icon>c</v-icon>
+      <v-btn @click="showCreateForm">
+        <v-icon>投稿する</v-icon>
       </v-btn>
       <v-dialog v-model="displayForm" max-width="500px">
         <!--コメント入力フォーム-->
@@ -79,20 +172,6 @@
                   ></option>
                 </select>
               </div>
-              <!-- <div>
-                <h5>欲しいキャラ</h5>
-                <select class="selectBox" v-model="inputSeekingCharacter">
-                  <option disabled value="">
-                    欲しいキャラを選択してください
-                  </option>
-                  <option
-                    v-for="(v, i) in seekingCharacters"
-                    :key="i"
-                    :value="v"
-                    v-text="v"
-                  ></option>
-                </select>
-              </div> -->
               <h5>欲しいキャラ</h5>
               <div v-for="(v, i) in seekingCharacters" :key="i">
                 <input
@@ -139,7 +218,7 @@
     </div>
 
     <v-list three-line>
-      <template v-for="(comment, index) in comments">
+      <template v-for="(comment, index) in displyaComments">
         <v-list-item :key="index" avatar>
           <v-list-item-avatar>
             <img :src="comment.avatar" />
@@ -195,6 +274,18 @@ export default {
       inputSeekingCharacter: [],
       inputMaxRank: "",
       inputBadge: "",
+
+      //検索条件
+      searchCondition: {
+        platform: "",
+        rank: "",
+        vc: "",
+        playstyle: [],
+        myCharacter: "",
+        seekingCharacter: [],
+        maxRank: "",
+        badge: "",
+      },
 
       // バリデーション
       valid: true,
@@ -267,6 +358,24 @@ export default {
       // firestoreのcommentsコレクションを参照
       comments: db.collection("comments").orderBy("createdAt"),
     };
+  },
+
+  computed: {
+    displyaComments() {
+      let displayComments = this.comments;
+      const searchConditionObj = JSON.parse(
+        JSON.stringify(this.searchCondition)
+      );
+      for (const key in searchConditionObj) {
+        if (searchConditionObj[key] && searchConditionObj[key].length) {
+          displayComments = displayComments.filter((comment) => {
+            return comment[key] === searchConditionObj[key];
+          });
+        }
+      }
+
+      return displayComments;
+    },
   },
   methods: {
     countUp() {
