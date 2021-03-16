@@ -2,7 +2,7 @@
   <div class="">
     <!--検索条件-->
     <h4>検索条件</h4>
-    <v-container>
+    <v-container class="">
       <div>
         <h5>プラットフォーム</h5>
         <select class="selectBox" v-model="searchCondition.platform">
@@ -368,9 +368,22 @@ export default {
       );
       for (const key in searchConditionObj) {
         if (searchConditionObj[key] && searchConditionObj[key].length) {
-          displayComments = displayComments.filter((comment) => {
-            return comment[key] === searchConditionObj[key];
-          });
+          console.log(searchConditionObj[key]);
+          if (Array.isArray(searchConditionObj[key])) {
+            displayComments = displayComments.filter((comment) => {
+              return (
+                [...comment[key], ...searchConditionObj[key]].filter(
+                  (v) =>
+                    comment[key].includes(v) &&
+                    searchConditionObj[key].includes(v)
+                ).length > 0
+              );
+            });
+          } else {
+            displayComments = displayComments.filter((comment) => {
+              return comment[key] === searchConditionObj[key];
+            });
+          }
         }
       }
 
