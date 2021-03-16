@@ -3,8 +3,8 @@
   <div class="mainBody">
     <div>
       <!--フォームの表示ボタン-->
-      <v-btn color="blue" dark center fab fixed right @click="showCreateForm">
-        <v-icon>c</v-icon>
+      <v-btn @click="showCreateForm">
+        <v-icon>投稿する</v-icon>
       </v-btn>
       <v-dialog v-model="displayForm" max-width="500px">
         <!--コメント入力フォーム-->
@@ -80,20 +80,6 @@
                   ></option>
                 </select>
               </div>
-              <!-- <div>
-                <h5>欲しいキャラ</h5>
-                <select class="selectBox" v-model="inputSeekingCharacter">
-                  <option disabled value="">
-                    欲しいキャラを選択してください
-                  </option>
-                  <option
-                    v-for="(v, i) in seekingCharacters"
-                    :key="i"
-                    :value="v"
-                    v-text="v"
-                  ></option>
-                </select>
-              </div> -->
               <h5>欲しいキャラ</h5>
               <div v-for="(v, i) in seekingCharacters" :key="i">
                 <input
@@ -148,24 +134,20 @@
 
           <v-list-item-content>
             <v-list-item-subtitle class="text--primary subheading">
-              <v-layout class="align-baseline">
-              <v-flex>
-                <v-card class="contentTitle">プラットフォーム:</v-card>{{ comment.platform }} <v-card>ランク:</v-card>{{
-                  comment.rank
-                }} VC:{{ comment.vc }} プレイスタイル:{{
-                  comment.playstyle
-                }}
-              </v-flex>
+              <v-layout wrap class="contentLine">
+                <v-flex><span class="contentTitle">プラットフォーム : </span>{{ comment.platform }}</v-flex>
+                <v-flex><span class="contentTitle">ランク : </span>{{comment.rank}}</v-flex>
+                <v-flex><span class="contentTitle">VC : </span>{{ comment.vc }}</v-flex> 
+                <v-flex><span class="contentTitle">プレイスタイル : </span>{{ comment.playstyle }}</v-flex>
               </v-layout>
-              <p>
-                自分のキャラ:{{ comment.myCharacter }} 欲しいキャラ:{{
-                  comment.seekingCharacter
-                }}
-                最高ランク:{{ comment.maxRank }} 獲得バッジ:{{ comment.badge }}
-              </p>
-              <p>コメント:{{ comment.comment }}</p>
-              </v-list-item-subtitle
-            >
+              <div class="contentLine"><span class="contentTitle">自分のキャラ : </span>{{ comment.myCharacter }}</div>
+              <div class="contentLine"><span class="contentTitle">欲しいキャラ : </span>{{ comment.seekingCharacter }}</div>
+              <v-layout wrap class="contentLine">
+                <v-flex><span class="contentTitle">最高ランク : </span>{{ comment.maxRank }}</v-flex> 
+                <v-flex><span class="contentTitle">獲得バッジ : </span>{{ comment.badge }}</v-flex>
+              </v-layout>
+              <div><span class="contentTitle">コメント : </span>{{ comment.comment }}</div>
+              </v-list-item-subtitle>
             <v-list-item-subtitle>
               <!-- {{comment.createdAt.toDate().toLocaleString()}} -->
             </v-list-item-subtitle>
@@ -200,6 +182,18 @@ export default {
       inputSeekingCharacter: [],
       inputMaxRank: "",
       inputBadge: "",
+
+      //検索条件
+      searchCondition: {
+        platform: "",
+        rank: "",
+        vc: "",
+        playstyle: [],
+        myCharacter: "",
+        seekingCharacter: [],
+        maxRank: "",
+        badge: "",
+      },
 
       // バリデーション
       valid: true,
@@ -273,6 +267,24 @@ export default {
       comments: db.collection("comments").orderBy("createdAt"),
     };
   },
+
+  computed: {
+    displyaComments() {
+      let displayComments = this.comments;
+      const searchConditionObj = JSON.parse(
+        JSON.stringify(this.searchCondition)
+      );
+      for (const key in searchConditionObj) {
+        if (searchConditionObj[key] && searchConditionObj[key].length) {
+          displayComments = displayComments.filter((comment) => {
+            return comment[key] === searchConditionObj[key];
+          });
+        }
+      }
+
+      return displayComments;
+    },
+  },
   methods: {
     countUp() {
       this.count++;
@@ -331,5 +343,9 @@ export default {
 
 .contentTitle {
   font-weight: bold;
+}
+
+.contentLine {
+  margin-bottom: 15px;
 }
 </style>
