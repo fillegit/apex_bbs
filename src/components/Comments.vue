@@ -368,7 +368,6 @@ export default {
       );
       for (const key in searchConditionObj) {
         if (searchConditionObj[key] && searchConditionObj[key].length) {
-          console.log(searchConditionObj[key]);
           if (Array.isArray(searchConditionObj[key])) {
             displayComments = displayComments.filter((comment) => {
               return (
