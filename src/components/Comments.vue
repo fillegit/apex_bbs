@@ -1,5 +1,6 @@
 <template>
-  <div class="">
+<div class="mainBackground">
+  <div class="mainBody">
     <div>
       <!--フォームの表示ボタン-->
       <v-btn color="blue" dark center fab fixed right @click="showCreateForm">
@@ -138,29 +139,32 @@
       </v-dialog>
     </div>
 
-    <v-list three-line>
+    <v-list>
       <template v-for="(comment, index) in comments">
         <v-list-item :key="index" avatar>
-          <v-list-item-avatar>
+          <!-- <v-list-item-avatar>
             <img :src="comment.avatar" />
-          </v-list-item-avatar>
+          </v-list-item-avatar> -->
 
           <v-list-item-content>
-            <v-list-item-subtitle class="text--primary subheading"
-              ><p>コメント:{{ comment.comment }}</p>
-              <p>
-                プラットフォーム:{{ comment.platform }} ランク:{{
+            <v-list-item-subtitle class="text--primary subheading">
+              <v-layout class="align-baseline">
+              <v-flex>
+                <v-card class="contentTitle">プラットフォーム:</v-card>{{ comment.platform }} <v-card>ランク:</v-card>{{
                   comment.rank
-                }}
-                VC:{{ comment.vc }} プレイスタイル:{{
+                }} VC:{{ comment.vc }} プレイスタイル:{{
                   comment.playstyle
                 }}
+              </v-flex>
+              </v-layout>
+              <p>
                 自分のキャラ:{{ comment.myCharacter }} 欲しいキャラ:{{
                   comment.seekingCharacter
                 }}
                 最高ランク:{{ comment.maxRank }} 獲得バッジ:{{ comment.badge }}
               </p>
-              }}</v-list-item-subtitle
+              <p>コメント:{{ comment.comment }}</p>
+              </v-list-item-subtitle
             >
             <v-list-item-subtitle>
               <!-- {{comment.createdAt.toDate().toLocaleString()}} -->
@@ -173,6 +177,7 @@
       </template>
     </v-list>
   </div>
+</div>
 </template>
 
 <script>
@@ -314,5 +319,17 @@ export default {
 <style>
 .selectBox {
   border: double;
+}
+
+.mainBody {
+  margin: 0 200px 0;
+}
+
+.mainBackground {
+  background-color: gray;
+}
+
+.contentTitle {
+  font-weight: bold;
 }
 </style>
