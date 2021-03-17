@@ -1,86 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <div class="">
-    <!--検索条件-->
-    <h4>検索条件</h4>
-    <v-container class="">
-      <div>
-        <h5>プラットフォーム</h5>
-        <select class="selectBox" v-model="searchCondition.platform">
-          <option value="">プラットフォームを選択してください</option>
-          <option
-            v-for="(v, i) in platforms"
-            :key="i"
-            :value="v"
-            v-text="v"
-          ></option>
-        </select>
-      </div>
-      <div>
-        <h5>ランク</h5>
-        <select class="selectBox" v-model="searchCondition.rank">
-          <option value="">ランクを選択してください</option>
-          <option
-            v-for="(v, i) in ranks"
-            :key="i"
-            :value="v"
-            v-text="v"
-          ></option>
-        </select>
-      </div>
-      <div>
-        <h5>VC</h5>
-        <select class="selectBox" v-model="searchCondition.vc">
-          <option value="">VCを選択してください</option>
-          <option v-for="(v, i) in vcs" :key="i" :value="v" v-text="v"></option>
-        </select>
-      </div>
-      <h5>プレイスタイル</h5>
-      <div v-for="(v, i) in playstyles" :key="i">
-        <input
-          :id="'playstyle' + i"
-          type="checkbox"
-          :value="v"
-          v-model="searchCondition.playstyle"
-        />
-        <label :for="'playstyle' + i">{{ v }}</label>
-      </div>
-      <div>
-        <h5>自分のキャラクター</h5>
-        <select class="selectBox" v-model="searchCondition.myCharacter">
-          <option value="">自分のキャラクターを選択してください</option>
-          <option
-            v-for="(v, i) in myCharacters"
-            :key="i"
-            :value="v"
-            v-text="v"
-          ></option>
-        </select>
-      </div>
-      <h5>欲しいキャラ</h5>
-      <div v-for="(v, i) in seekingCharacters" :key="i">
-        <input
-          :id="'seekingCharacter' + i"
-          type="checkbox"
-          :value="v"
-          v-model="searchCondition.seekingCharacter"
-        />
-        <label :for="'seekingCharacter' + i">{{ v }}</label>
-      </div>
-      <div>
-        <h5>自分の今までの最高ランク</h5>
-        <select class="selectBox" v-model="searchCondition.maxRank">
-          <option value="">今までの最高ランクを選択してください</option>
-          <option
-            v-for="(v, i) in maxRanks"
-            :key="i"
-            :value="v"
-            v-text="v"
-          ></option>
-        </select>
-      </div>
-      <div>
-=======
   <div class="mainBackground">
     <div class="mainBody">
       <v-expansion-panels focusable>
@@ -182,7 +100,6 @@
                 </v-flex>
               </v-layout>
               <!-- <div>
->>>>>>> konishi/design
         <h5>獲得バッチ</h5>
         <select class="selectBox" v-model="searchCondition.badge">
           <option value="">獲得したバッチを選択してください</option>
