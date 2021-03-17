@@ -88,7 +88,7 @@
                   :value="v"
                   v-model="searchCondition.myCharacter"
                 />
-                <label :for="'myCharacter' + i">{{ v }}</label>
+                <label :for="'filterMyCharacter' + i">{{ v }}</label>
               </div>
               </v-flex>
                <v-flex>
@@ -100,7 +100,7 @@
                   :value="v"
                   v-model="searchCondition.seekingCharacter"
                 />
-                <label :for="'seekingCharacter' + i">{{ v }}</label>
+                <label :for="'filterSeekingCharacter' + i">{{ v }}</label>
               </div>
               </v-flex>
               </v-layout>
@@ -228,7 +228,7 @@
                   :value="v"
                   v-model="inputMyCharacter"
                 />
-                <label :for="'myCharacter' + i">{{ v }}</label>
+                <label :for="'inputMyCharacter' + i">{{ v }}</label>
               </div>
               </v-flex>
               <v-flex>
@@ -240,7 +240,7 @@
                   :value="v"
                   v-model="inputSeekingCharacter"
                 />
-                <label :for="'seekingCharacter' + i">{{ v }}</label>
+                <label :for="'inputSeekingCharacter' + i">{{ v }}</label>
               </div>
               </v-flex>
               </v-layout>
