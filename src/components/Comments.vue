@@ -271,7 +271,7 @@
 
       <div class="boardArea">
         <v-list>
-          <template v-for="(comment, index) in comments">
+          <template v-for="(comment, index) in displyaComments">
             <v-list-item :key="index" avatar class="eachPost">
               <!-- <v-list-item-avatar>
             <img :src="comment.avatar" />
