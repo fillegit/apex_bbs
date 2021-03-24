@@ -279,10 +279,18 @@
 
               <v-list-item-content>
                 <v-list-item-subtitle class="text--primary subheading">
-                  <div class="contentLine">
-                    <span class="contentTitle">ID : </span
-                    >{{ comment.playerId }}
-                  </div>
+                  <v-layout wrap class="contentLine">
+                    <v-flex>
+                      <span class="contentTitle">ID : </span
+                      >{{ comment.playerId }}</v-flex
+                    >
+                    <v-flex class="rightEnd">
+                      <div>
+                        <span class="contentTitle">投稿日時 : </span
+                        >{{ comment.createdAt.toDate() | moment }}
+                      </div>
+                    </v-flex>
+                  </v-layout>
                   <v-layout wrap class="contentLine">
                     <v-flex
                       ><span class="contentTitle">プラットフォーム : </span
@@ -305,14 +313,16 @@
                       >{{ comment.maxRank }}</v-flex
                     >
                   </v-layout>
-                  <div class="contentLine">
-                    <span class="contentTitle">自分のキャラ : </span
-                    >{{ arrayToString(comment.myCharacter) }}
-                  </div>
-                  <div class="contentLine">
-                    <span class="contentTitle">欲しいキャラ : </span
-                    >{{ arrayToString(comment.seekingCharacter) }}
-                  </div>
+                  <v-layout wrap class="contentLine">
+                    <v-flex sm6 md6 lg6>
+                      <span class="contentTitle">自分のキャラ : </span
+                      >{{ arrayToString(comment.myCharacter) }}
+                    </v-flex>
+                    <v-flex>
+                      <span class="contentTitle">欲しいキャラ : </span
+                      >{{ arrayToString(comment.seekingCharacter) }}
+                    </v-flex>
+                  </v-layout>
                   <!-- <v-layout wrap class="contentLine">
                 <v-flex><span class="contentTitle">獲得バッジ : </span>{{ comment.badge }}</v-flex>
               </v-layout> -->
@@ -321,9 +331,7 @@
                     >{{ comment.comment }}
                   </div>
                 </v-list-item-subtitle>
-                <v-list-item-subtitle>
-                  <!-- {{comment.createdAt.toDate().toLocaleString()}} -->
-                </v-list-item-subtitle>
+                <v-list-item-subtitle> </v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action> </v-list-item-action>
@@ -338,6 +346,7 @@
 
 <script>
 import { db } from "../plugins/firebase";
+import moment from "moment";
 // import formInfo from '../assets/form.js';
 
 export default {
@@ -448,8 +457,14 @@ export default {
   firestore() {
     return {
       // firestoreのcommentsコレクションを参照
-      comments: db.collection("comments").orderBy("createdAt"),
+      comments: db.collection("comments").orderBy("createdAt", "desc"),
     };
+  },
+
+  filters: {
+    moment: function (date) {
+      return moment(date).format("M/DD HH:mm");
+    },
   },
 
   computed: {
@@ -567,6 +582,10 @@ export default {
 }
 
 .eachPost {
+}
+
+.rightEnd {
+  text-align: right;
 }
 
 .inputFormLine {
