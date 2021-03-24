@@ -1,5 +1,5 @@
 <template>
-  <v-app> 
+  <v-app>
     <!-- サイドメニュー -->
     <v-navigation-drawer app clipped v-model="drawer" class="sideMenu">
       <!-- ここにフィルター入れたい -->
@@ -7,10 +7,10 @@
 
     <!-- ヘッダー -->
     <v-app-bar app clippedLeft flat color="primary" dark>
-      <v-app-bar-nav-icon @click.stop="drawer=!drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <h1>
-        Apex Legendsの固定パーティ・フレンド募集掲示板 エーペックス
-        レジェンズ友達募集用掲示板
+        Apex Legendsフレンド募集掲示板　エーペックス
+        レジェンズパーティ募集用掲示板
       </h1>
     </v-app-bar>
 
@@ -36,7 +36,7 @@ export default {
   },
 
   data: () => ({
-    drawer: false
+    drawer: false,
   }),
 };
 </script>
