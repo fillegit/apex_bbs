@@ -9,7 +9,7 @@
     <v-app-bar app clippedLeft flat color="primary" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <h1>
-        Apex Legendsフレンド募集掲示板　エーペックス
+        Apex Legendsフレンド募集掲示板 エーペックス
         レジェンズパーティ募集用掲示板
       </h1>
     </v-app-bar>
