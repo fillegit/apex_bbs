@@ -551,17 +551,23 @@ export default {
 </script>
 
 <style>
-.selectBox {
-  border: double;
+.mainBackground {
+  background-color: gray;
 }
 
 .mainBody {
-  margin: 0 200px 0;
+  max-width: 80%;
+  margin: 0 auto;
   background-color: white;
 }
+@media screen and (max-width: 767px) {
+  .mainBody {
+    max-width: 100%;
+  }
+}
 
-.mainBackground {
-  background-color: gray;
+.selectBox {
+  border: double;
 }
 
 .contentTitle {
