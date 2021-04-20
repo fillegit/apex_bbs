@@ -1,17 +1,18 @@
 <template>
   <v-app>
     <!-- サイドメニュー -->
-    <v-navigation-drawer app clipped v-model="drawer" class="sideMenu">
-      <!-- ここにフィルター入れたい -->
-    </v-navigation-drawer>
+    <!-- <v-navigation-drawer app clipped v-model="drawer" class="sideMenu"> -->
+    <!-- </v-navigation-drawer> -->
 
     <!-- ヘッダー -->
     <v-app-bar app clippedLeft flat color="primary" dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <h1>
-        Apex Legendsフレンド募集掲示板　エーペックス
-        レジェンズパーティ募集用掲示板
-      </h1>
+      <!-- <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
+      <div class="headerTitle">
+        <h1>
+          Apex Legendsフレンド募集掲示板
+          エーペックスレジェンズパーティ募集用掲示板
+        </h1>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -42,6 +43,15 @@ export default {
 </script>
 
 <style>
+.headerTitle {
+  /* margin: 0 auto; */
+}
+@media screen and (max-width: 767px) {
+  .headerTitle {
+    font-size: 8px;
+  }
+}
+
 .sideMenu {
   border-right: 2px solid whitesmoke;
 }
