@@ -135,9 +135,6 @@
                 <v-flex sm6 md6 lg6>
                   <h4>プラットフォーム</h4>
                   <select class="selectBox" v-model="inputPlatform">
-                    <option disabled value="">
-                      プラットフォームを選択してください
-                    </option>
                     <option
                       v-for="(v, i) in platforms"
                       :key="i"
@@ -149,7 +146,6 @@
                 <v-flex>
                   <h4>VC</h4>
                   <select class="selectBox" v-model="inputVc">
-                    <option disabled value="">VCを選択してください</option>
                     <option
                       v-for="(v, i) in vcs"
                       :key="i"
@@ -163,7 +159,6 @@
                 <v-flex sm6 md6 lg6>
                   <h4>あなたの現在のランク</h4>
                   <select class="selectBox" v-model="inputRank">
-                    <option disabled value="">ランクを選択してください</option>
                     <option
                       v-for="(v, i) in ranks"
                       :key="i"
@@ -175,7 +170,6 @@
                 <v-flex>
                   <h4>あなたの今までの最高ランク</h4>
                   <select class="selectBox" v-model="inputMaxRank">
-                    <option disabled value="">ランクを選択してください</option>
                     <option
                       v-for="(v, i) in maxRanks"
                       :key="i"
@@ -189,9 +183,6 @@
                 <v-flex sm6 md6 lg6>
                   <h4>プレイスタイル</h4>
                   <select class="selectBox" v-model="inputPlaystyle">
-                    <option disabled value="">
-                      プレイスタイルを選択してください
-                    </option>
                     <option
                       v-for="(v, i) in playstyles"
                       :key="i"
@@ -358,13 +349,13 @@ export default {
       comments: [],
       inputComment: "",
       inputPlayerId: "",
-      inputPlatform: "",
-      inputRank: "",
-      inputVc: "",
-      inputPlaystyle: "",
-      inputMyCharacter: [],
-      inputSeekingCharacter: [],
-      inputMaxRank: "",
+      inputPlatform: "PC",
+      inputRank: "ブロンズ",
+      inputVc: "Discord",
+      inputPlaystyle: "ランク",
+      inputMyCharacter: ["なんでもOK"],
+      inputSeekingCharacter: ["なんでもOK"],
+      inputMaxRank: "ブロンズ",
       // inputBadge: "",
 
       //検索条件
