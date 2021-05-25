@@ -319,8 +319,6 @@
                       <span class="contentTitle">自分のキャラ : </span
                       >{{ arrayToString(comment.myCharacter) }}
                     </v-flex>
-                  </v-layout>
-                  <v-layout wrap class="contentLine">
                     <v-flex>
                       <span class="contentTitle">欲しいキャラ : </span
                       >{{ arrayToString(comment.seekingCharacter) }}
