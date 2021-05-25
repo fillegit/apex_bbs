@@ -254,6 +254,7 @@
                 </select>
               </div> -->
                 <v-btn :disabled="!valid" @click="addComment"> 投稿する </v-btn>
+                <v-btn @click="hideCreateForm" class="ml-4"> 閉じる </v-btn>
               </v-form>
             </v-container>
           </v-card>
@@ -305,7 +306,7 @@
                     >
                   </v-layout>
                   <v-layout wrap class="contentLine">
-                    <v-flex sm6 md6 lg6>
+                    <v-flex>
                       <span class="contentTitle">自分のキャラ : </span
                       >{{ arrayToString(comment.myCharacter) }}
                     </v-flex>
@@ -407,6 +408,7 @@ export default {
         "ランパート",
         "ホライゾン",
         "ヒューズ",
+        "ヴァルキリー",
       ],
       seekingCharacters: [
         "なんでもOK",
@@ -426,6 +428,7 @@ export default {
         "ランパート",
         "ホライゾン",
         "ヒューズ",
+        "ヴァルキリー",
       ],
       maxRanks: [
         "ブロンズ",
