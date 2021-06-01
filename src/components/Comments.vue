@@ -238,6 +238,7 @@
                   label=""
                   required
                   class="mt-0 pt-0"
+                  style="white-space: pre-wrap; word-wrap: break-word"
                 ></v-text-field>
                 <!-- <div>
                 <h4>獲得バッチ</h4>
@@ -269,7 +270,7 @@
             <img :src="comment.avatar" />
           </v-list-item-avatar> -->
 
-              <v-list-item-content>
+              <v-list-item-content class="my-1">
                 <v-list-item-subtitle class="text--primary subheading">
                   <v-layout wrap class="contentLine">
                     <v-flex>
@@ -318,12 +319,11 @@
                   <!-- <v-layout wrap class="contentLine">
                 <v-flex><span class="contentTitle">獲得バッジ : </span>{{ comment.badge }}</v-flex>
               </v-layout> -->
-                  <div class="contentLine">
+                  <div class="u-pre-wrap">
                     <span class="contentTitle">コメント : </span
                     >{{ comment.comment }}
                   </div>
                 </v-list-item-subtitle>
-                <v-list-item-subtitle> </v-list-item-subtitle>
               </v-list-item-content>
 
               <v-list-item-action> </v-list-item-action>
@@ -590,5 +590,9 @@ export default {
 
 .inputFormLine {
   margin-bottom: 15px;
+}
+
+.u-pre-wrap {
+  white-space: pre-wrap;
 }
 </style>
