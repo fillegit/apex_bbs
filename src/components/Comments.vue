@@ -1,105 +1,98 @@
 <template>
   <div class="mainBackground">
     <div class="mainBody">
-      <v-expansion-panels focusable>
-        <v-expansion-panel>
-          <v-expansion-panel-header>
-            しぼりこみ検索はこちらから
-          </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            <!--検索条件-->
-            <v-container>
-              <v-layout wrap class="inputFormLine">
-                <v-flex sm4 md4 lg4>
-                  <h4>プラットフォーム</h4>
-                  <select class="selectBox" v-model="searchCondition.platform">
-                    <option value="">プラットフォームを選択してください</option>
-                    <option
-                      v-for="(v, i) in platforms"
-                      :key="i"
-                      :value="v"
-                      v-text="v"
-                    ></option>
-                  </select>
-                </v-flex>
-                <v-flex>
-                  <h4>VC</h4>
-                  <select class="selectBox" v-model="searchCondition.vc">
-                    <option value="">VCを選択してください</option>
-                    <option
-                      v-for="(v, i) in vcs"
-                      :key="i"
-                      :value="v"
-                      v-text="v"
-                    ></option>
-                  </select>
-                </v-flex>
-              </v-layout>
-              <v-layout wrap class="inputFormLine">
-                <v-flex sm4 md4 lg4>
-                  <h4>投稿者の現在のランク</h4>
-                  <select class="selectBox" v-model="searchCondition.rank">
-                    <option value="">ランクを選択してください</option>
-                    <option
-                      v-for="(v, i) in ranks"
-                      :key="i"
-                      :value="v"
-                      v-text="v"
-                    ></option>
-                  </select>
-                </v-flex>
-                <v-flex>
-                  <h4>あなたの今までの最高ランク</h4>
-                  <select class="selectBox" v-model="searchCondition.maxRank">
-                    <option value="">ランクを選択してください</option>
-                    <option
-                      v-for="(v, i) in maxRanks"
-                      :key="i"
-                      :value="v"
-                      v-text="v"
-                    ></option>
-                  </select>
-                </v-flex>
-                <v-flex>
-                  <h4>プレイスタイル</h4>
-                  <select class="selectBox" v-model="searchCondition.playstyle">
-                    <option value="">プレイスタイルを選択してください</option>
-                    <option
-                      v-for="(v, i) in playstyles"
-                      :key="i"
-                      :value="v"
-                      v-text="v"
-                    ></option>
-                  </select>
-                </v-flex>
-              </v-layout>
-              <v-layout wrap>
-                <v-flex sm5 md5 lg5>
-                  <h4>自分のキャラクター</h4>
-                  <div v-for="(v, i) in myCharacters" :key="i">
-                    <input
-                      :id="'filterMyCharacter' + i"
-                      type="checkbox"
-                      :value="v"
-                      v-model="searchCondition.myCharacter"
-                    />
-                    <label :for="'filterMyCharacter' + i">{{ v }}</label>
-                  </div>
-                </v-flex>
-                <v-flex>
-                  <h4>欲しいキャラ</h4>
-                  <div v-for="(v, i) in seekingCharacters" :key="i">
-                    <input
-                      :id="'filterSeekingCharacter' + i"
-                      type="checkbox"
-                      :value="v"
-                      v-model="searchCondition.seekingCharacter"
-                    />
-                    <label :for="'filterSeekingCharacter' + i">{{ v }}</label>
-                  </div>
-                </v-flex>
-              </v-layout>
-              <!-- <div>
+      <!--検索条件-->
+      <v-container>
+        <h3>絞り込み条件</h3>
+        <v-layout wrap class="topFilter">
+          <v-flex sm4 md4 lg4>
+            <h4>プラットフォーム</h4>
+            <select class="selectBox" v-model="searchCondition.platform">
+              <option value="">条件なし</option>
+              <option
+                v-for="(v, i) in platforms"
+                :key="i"
+                :value="v"
+                v-text="v"
+              ></option>
+            </select>
+          </v-flex>
+          <!-- <v-flex>
+            <h4>VC</h4>
+            <select class="selectBox" v-model="searchCondition.vc">
+              <option value="">VCを選択してください</option>
+              <option
+                v-for="(v, i) in vcs"
+                :key="i"
+                :value="v"
+                v-text="v"
+              ></option>
+            </select>
+          </v-flex> -->
+          <v-flex sm4 md4 lg4>
+            <h4>投稿者のランク</h4>
+            <select class="selectBox" v-model="searchCondition.rank">
+              <option value="">条件なし</option>
+              <option
+                v-for="(v, i) in ranks"
+                :key="i"
+                :value="v"
+                v-text="v"
+              ></option>
+            </select>
+          </v-flex>
+          <!-- <v-flex>
+            <h4>あなたの今までの最高ランク</h4>
+            <select class="selectBox" v-model="searchCondition.maxRank">
+              <option value="">ランクを選択してください</option>
+              <option
+                v-for="(v, i) in maxRanks"
+                :key="i"
+                :value="v"
+                v-text="v"
+              ></option>
+            </select>
+          </v-flex> -->
+          <v-flex>
+            <h4>プレイスタイル</h4>
+            <select class="selectBox" v-model="searchCondition.playstyle">
+              <option value="">条件なし</option>
+              <option
+                v-for="(v, i) in playstyles"
+                :key="i"
+                :value="v"
+                v-text="v"
+              ></option>
+            </select>
+          </v-flex>
+        </v-layout>
+        <!-- <v-layout wrap>
+          <v-flex sm5 md5 lg5>
+            <h4>自分のキャラクター</h4>
+            <div v-for="(v, i) in myCharacters" :key="i">
+              <input
+                :id="'filterMyCharacter' + i"
+                type="checkbox"
+                :value="v"
+                v-model="searchCondition.myCharacter"
+              />
+              <label :for="'filterMyCharacter' + i">{{ v }}</label>
+            </div>
+          </v-flex>
+          <v-flex>
+            <h4>欲しいキャラ</h4>
+            <div v-for="(v, i) in seekingCharacters" :key="i">
+              <input
+                :id="'filterSeekingCharacter' + i"
+                type="checkbox"
+                :value="v"
+                v-model="searchCondition.seekingCharacter"
+              />
+              <label :for="'filterSeekingCharacter' + i">{{ v }}</label>
+            </div>
+          </v-flex>
+        </v-layout> -->
+        <!-- <div>
         <h5>獲得バッチ</h5>
         <select class="selectBox" v-model="searchCondition.badge">
           <option value="">獲得したバッチを選択してください</option>
@@ -111,11 +104,8 @@
           ></option>
         </select>
       </div> -->
-            </v-container>
-            <!--検索条件/-->
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
+      </v-container>
+      <!--検索条件/-->
 
       <div>
         <!--フォームの表示ボタン-->
@@ -143,19 +133,6 @@
                     ></option>
                   </select>
                 </v-flex>
-                <v-flex>
-                  <h4>VC</h4>
-                  <select class="selectBox" v-model="inputVc">
-                    <option
-                      v-for="(v, i) in vcs"
-                      :key="i"
-                      :value="v"
-                      v-text="v"
-                    ></option>
-                  </select>
-                </v-flex>
-              </v-layout>
-              <v-layout wrap class="inputFormLine">
                 <v-flex sm6 md6 lg6>
                   <h4>あなたの現在のランク</h4>
                   <select class="selectBox" v-model="inputRank">
@@ -167,7 +144,21 @@
                     ></option>
                   </select>
                 </v-flex>
-                <v-flex>
+                <!-- <v-flex>
+                  <h4>VC</h4>
+                  <select class="selectBox" v-model="inputVc">
+                    <option
+                      v-for="(v, i) in vcs"
+                      :key="i"
+                      :value="v"
+                      v-text="v"
+                    ></option>
+                  </select>
+                </v-flex> -->
+              </v-layout>
+              <!-- <v-layout wrap class="inputFormLine"> -->
+
+              <!-- <v-flex>
                   <h4>あなたの今までの最高ランク</h4>
                   <select class="selectBox" v-model="inputMaxRank">
                     <option
@@ -177,8 +168,8 @@
                       v-text="v"
                     ></option>
                   </select>
-                </v-flex>
-              </v-layout>
+                </v-flex> -->
+              <!-- </v-layout> -->
               <v-layout wrap class="inputFormLine">
                 <v-flex sm6 md6 lg6>
                   <h4>プレイスタイル</h4>
@@ -192,7 +183,7 @@
                   </select>
                 </v-flex>
                 <v-flex sm5 md5 lg5>
-                  <h4>ID</h4>
+                  <h4>ID（必須）</h4>
                   <v-form ref="form" v-model="valid" lazy-validation>
                     <v-text-field
                       v-model="inputPlayerId"
@@ -205,7 +196,7 @@
                 </v-flex>
               </v-layout>
               <v-layout wrap class="inputFormLine">
-                <v-flex>
+                <!-- <v-flex>
                   <h4>自分のキャラクター</h4>
                   <div v-for="(v, i) in myCharacters" :key="i">
                     <input
@@ -216,17 +207,23 @@
                     />
                     <label :for="'inputMyCharacter' + i">{{ v }}</label>
                   </div>
-                </v-flex>
+                </v-flex> -->
                 <v-flex>
                   <h4>欲しいキャラ</h4>
-                  <div v-for="(v, i) in seekingCharacters" :key="i">
-                    <input
-                      :id="'inputSeekingCharacter' + i"
-                      type="checkbox"
-                      :value="v"
-                      v-model="inputSeekingCharacter"
-                    />
-                    <label :for="'inputSeekingCharacter' + i">{{ v }}</label>
+                  <div class="formCharacters">
+                    <div
+                      v-for="(v, i) in seekingCharacters"
+                      :key="i"
+                      class="formCharacter"
+                    >
+                      <input
+                        :id="'inputSeekingCharacter' + i"
+                        type="checkbox"
+                        :value="v"
+                        v-model="inputSeekingCharacter"
+                      />
+                      <label :for="'inputSeekingCharacter' + i">{{ v }}</label>
+                    </div>
                   </div>
                 </v-flex>
               </v-layout>
@@ -254,7 +251,9 @@
                   ></option>
                 </select>
               </div> -->
-                <v-btn :disabled="!valid" @click="addComment"> 投稿する </v-btn>
+                <v-btn :disabled="existsId()" @click="addComment">
+                  投稿する
+                </v-btn>
                 <v-btn @click="hideCreateForm" class="ml-4"> 閉じる </v-btn>
               </v-form>
             </v-container>
@@ -293,24 +292,24 @@
                       ><span class="contentTitle">ランク : </span
                       >{{ comment.rank }}</v-flex
                     >
-                    <v-flex
+                    <!-- <v-flex
                       ><span class="contentTitle">VC : </span
                       >{{ comment.vc }}</v-flex
-                    >
+                    > -->
                     <v-flex
                       ><span class="contentTitle">プレイスタイル : </span
                       >{{ comment.playstyle }}</v-flex
                     >
-                    <v-flex
+                    <!-- <v-flex
                       ><span class="contentTitle">最高到達ランク : </span
                       >{{ comment.maxRank }}</v-flex
-                    >
+                    > -->
                   </v-layout>
                   <v-layout wrap class="contentLine">
-                    <v-flex>
+                    <!-- <v-flex>
                       <span class="contentTitle">自分のキャラ : </span
                       >{{ arrayToString(comment.myCharacter) }}
-                    </v-flex>
+                    </v-flex> -->
                     <v-flex>
                       <span class="contentTitle">欲しいキャラ : </span
                       >{{ arrayToString(comment.seekingCharacter) }}
@@ -411,7 +410,6 @@ export default {
         "ヴァルキリー",
       ],
       seekingCharacters: [
-        "なんでもOK",
         "ブラッドハウンド",
         "ジブラルタル",
         "ライフライン",
@@ -429,6 +427,8 @@ export default {
         "ホライゾン",
         "ヒューズ",
         "ヴァルキリー",
+        "シア",
+        "なんでもOK",
       ],
       maxRanks: [
         "ブロンズ",
@@ -540,6 +540,10 @@ export default {
       }
       return str;
     },
+
+    existsId() {
+      return this.inputPlayerId == "";
+    },
   },
 };
 </script>
@@ -574,7 +578,7 @@ export default {
 
 .postButton {
   text-align: center;
-  margin: 30px 0 20px 0;
+  margin: 5px 0 5px 0;
 }
 
 .boardArea {
@@ -594,5 +598,20 @@ export default {
 
 .u-pre-wrap {
   white-space: pre-wrap;
+}
+
+.formCharacters {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.formCharacter {
+  width: 32%;
+  height: 2rem;
+}
+
+.topFilter {
+  /* padding: 7px 400px 10px 0px; */
 }
 </style>
